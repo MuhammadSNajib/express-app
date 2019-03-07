@@ -6,11 +6,12 @@ router.get("/products", (req, res) => {
   res.send("Get Products");
 });
 
-router.post("/products", (req, res) => {
+router.post("/products", (req, res, next) => {
   Products.create(req.body)
     .then((result) => {
       res.send(result);
     })
+    .catch(next)
 });
 
 router.put("/products/:id", (req, res) => {

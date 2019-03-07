@@ -24,6 +24,10 @@ app.use(bodyParser.json());
 //use routers
 app.use("/api", routers);
 
+//error middlewrae
+app.use((err, req, res, next) => {
+  res.status(422).send({ err: err.message })
+});
 
 
 app.listen(process.env.port || 5000, () => {
