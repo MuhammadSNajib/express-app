@@ -19,7 +19,10 @@ router.put("/products/:id", (req, res) => {
 });
 
 router.delete("/products/:id", (req, res) => {
-  res.send("Delete Products");
+  Products.findOneAndRemove({ _id: req.params.id })
+    .then((result) => {
+      res.send(result)
+    });
 });
 
 module.exports = router;
