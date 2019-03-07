@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 const app = express();
 const routers = require("./routers");
@@ -11,6 +12,11 @@ const bodyParser = require("body-parser");
 //     price: 12000
 //   })
 // });
+
+//mongodb connection
+mongoose.connect("mongodb://localhost:27017/data-products");
+mongoose.Promise = global.Promise;
+
 
 //use body-parser
 app.use(bodyParser.json());
