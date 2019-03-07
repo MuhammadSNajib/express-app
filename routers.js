@@ -15,7 +15,13 @@ router.post("/products", (req, res, next) => {
 });
 
 router.put("/products/:id", (req, res) => {
-  res.send("Put Product");
+  Products.findOneAndUpdate({ _id: req.params.id }, req.body)
+    .then((result) => {
+      Products.findOne({ _id: req.params.id })
+        .then((new_result) => {
+          res.send(new_result)
+        });
+    });
 });
 
 router.delete("/products/:id", (req, res) => {
