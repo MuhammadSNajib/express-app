@@ -2,18 +2,22 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/products", (req, res) => {
-  res.send("Get Products")
-})
+  res.send("Get Products");
+});
 
-router.post("/product", (req, res) => {
-  res.send("Post Product")
+router.post("/products", (req, res) => {
+  res.send({
+    method: "POST",
+    name: req.body.name,
+    price: req.body.price
+  });
 })
-router.put("/product/:id", (req, res) => {
-  res.send("Put Product")
-})
+router.put("/products/:id", (req, res) => {
+  res.send("Put Product");
+});
 
-router.delete("/product/:id", (req, res) => {
-  res.send("Delete Products")
-})
+router.delete("/products/:id", (req, res) => {
+  res.send("Delete Products");
+});
 
 module.exports = router;
