@@ -3,7 +3,15 @@ const router = express.Router();
 const Products = require("./models/products");
 
 router.get("/products", (req, res) => {
-  res.send("Get Products");
+  Products.find({}).then((result) => {
+    res.send(result)
+  })
+});
+
+router.get("/products/:id", (req, res) => {
+  Products.find({_id: req.params.id}).then((result) => {
+    res.send(result)
+  })
 });
 
 router.post("/products", (req, res, next) => {
@@ -17,18 +25,16 @@ router.post("/products", (req, res, next) => {
 router.put("/products/:id", (req, res) => {
   Products.findOneAndUpdate({ _id: req.params.id }, req.body)
     .then((result) => {
-      Products.findOne({ _id: req.params.id })
-        .then((new_result) => {
-          res.send(new_result)
-        });
+      Products.findOne({ _id: req.params.id }).then((new_result) => {
+        res.send(new_result)
+      });
     });
 });
 
 router.delete("/products/:id", (req, res) => {
-  Products.findOneAndRemove({ _id: req.params.id })
-    .then((result) => {
-      res.send(result)
-    });
+  Products.findOneAndRemove({ _id: req.params.id }).then((result) => {
+    res.send(result)
+  });
 });
 
 module.exports = router;
